@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://osa5shfyfjib"]
+
+[ext_resource type="PackedScene" uid="uid://81olrcg2bk5t" path="res://Ship/ship.tscn" id="1_vd3lj"]
+[ext_resource type="Script" path="res://World/world.gd" id="1_yurwn"]
+[ext_resource type="PackedScene" uid="uid://bj3uqo1ldu4xg" path="res://Menu/pause_menu_orchestrator.tscn" id="2_512ju"]
+[ext_resource type="PackedScene" uid="uid://cj1nxo55j3b2v" path="res://Water/water3/water_3.tscn" id="2_kanuc"]
+[ext_resource type="PackedScene" uid="uid://deuo4tdbbsxa8" path="res://Menu/save.tscn" id="2_l4hcx"]
+[ext_resource type="PackedScene" uid="uid://52wnsrbrh2qt" path="res://Isle/RitonIsle/riton_isle.tscn" id="3_8myug"]
+[ext_resource type="PackedScene" uid="uid://b7m3hapedvau4" path="res://Dialogue/container/Dialogue.tscn" id="8_y44ug"]
+
+[sub_resource type="Curve2D" id="Curve2D_yt871"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -140, 112, 0, 0, 0, 0, 0, 112)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsrib"]
+size = Vector2(8, 392)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tcs3"]
+size = Vector2(2266, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xrjx"]
+size = Vector2(2264, 8)
+
+[node name="World" type="Node2D" groups=["Persist"]]
+script = ExtResource("1_yurwn")
+
+[node name="Save" parent="." instance=ExtResource("2_l4hcx")]
+
+[node name="Water3" parent="." instance=ExtResource("2_kanuc")]
+offset_left = -3648.0
+offset_top = -4000.0
+offset_right = 4352.0
+offset_bottom = 4000.0
+
+[node name="PauseMenuOrchestrator" parent="." instance=ExtResource("2_512ju")]
+process_mode = 3
+
+[node name="RitonIsle" parent="." groups=["Persist"] instance=ExtResource("3_8myug")]
+z_index = 98
+position = Vector2(320, 88)
+
+[node name="MapBorder" type="StaticBody2D" parent="."]
+position = Vector2(-500, -500)
+collision_layer = 2
+
+[node name="MapBorder" type="CollisionPolygon2D" parent="MapBorder"]
+polygon = PackedVector2Array(340, 412, 2612, 412, 2612, 820, 948, 820, 340, 820, 340, 412, 244, 412, 276, 828, 420, 908, 1244, 908, 1948, 908, 2628, 892, 2668, 676, 2660, 420, 2436, 284, 1916, 292, 1020, 276, 436, 324, 308, 412)
+
+[node name="IntroPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_yt871")
+
+[node name="IntroPathProgress" type="PathFollow2D" parent="IntroPath"]
+position = Vector2(-140, 112)
+
+[node name="ShipIntro" parent="IntroPath/IntroPathProgress" instance=ExtResource("1_vd3lj")]
+z_index = 99
+
+[node name="LimitReachedAreas" type="Node2D" parent="."]
+light_mask = 4
+
+[node name="LeftLimit" type="Area2D" parent="LimitReachedAreas"]
+position = Vector2(-160, -88)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitReachedAreas/LeftLimit"]
+position = Vector2(4, 204)
+shape = SubResource("RectangleShape2D_wsrib")
+
+[node name="UpLimit" type="Area2D" parent="LimitReachedAreas"]
+position = Vector2(-160, -88)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitReachedAreas/UpLimit"]
+position = Vector2(1139, 4)
+shape = SubResource("RectangleShape2D_1tcs3")
+
+[node name="BottomLimit" type="Area2D" parent="LimitReachedAreas"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LimitReachedAreas/BottomLimit"]
+position = Vector2(980, 316)
+shape = SubResource("RectangleShape2D_4xrjx")
+
+[node name="RitonIsleStartingDiag" parent="." instance=ExtResource("8_y44ug")]
+dialog_file = "res://common/dialogs/riton_isle_enter_d.json"
+
+[node name="IntroDialog" parent="." instance=ExtResource("8_y44ug")]
+dialog_file = "res://common/dialogs/intro_overworld_d.json"
+
+[node name="LimitDialog" parent="." instance=ExtResource("8_y44ug")]
+dialog_file = "res://common/dialogs/limit_reached_d.json"
+
+[node name="Ship" parent="." instance=ExtResource("1_vd3lj")]
+visible = false
+
+[connection signal="save_data" from="PauseMenuOrchestrator" to="Save" method="_on_save_from_pause"]
+[connection signal="island_leaved" from="RitonIsle" to="." method="_on_isle_leaved"]
+[connection signal="island_touched" from="RitonIsle" to="." method="_on_isle_touched"]
+[connection signal="body_entered" from="LimitReachedAreas/LeftLimit" to="." method="_on_left_limit_area_entered"]
+[connection signal="body_entered" from="LimitReachedAreas/UpLimit" to="." method="_on_up_limit_body_entered"]
+[connection signal="body_entered" from="LimitReachedAreas/BottomLimit" to="." method="_on_bottom_limit_body_entered"]
+[connection signal="dialog_end" from="RitonIsleStartingDiag" to="." method="_on_dialog_end"]
+[connection signal="dialogue_start" from="RitonIsleStartingDiag" to="." method="_on_dialog_start"]
+[connection signal="dialog_end" from="IntroDialog" to="." method="_on_dialog_end"]
+[connection signal="dialogue_start" from="IntroDialog" to="." method="_on_dialog_start"]

@@ -1,0 +1,19 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"??": "left",
+		"(Voix lointaine)": "right"
+	},
+	"sprites": {},
+	"chat": [
+		{"name": "??", "text": "L'océan à perte de vue...", "sprite": null},
+		{"name": "??", "text": "Entouré de vos camarades, vous festoyez et célèbrez votre butin durement acquis.", "sprite": null},
+		{"name": "??", "text": "Après des années de recherches vous avez enfin mis la main sur la Choppe Dorée", "sprite": null},
+		{"name": "??", "text": "Cet artefact légendaire qui permettrait à quiconque en sa possession de ne plus jamais subir de blackout...", "sprite": null},
+		{"name": "(Voix lointaine)", "text": "Dites-donc l'ami il s'rait p'têtre temps d'partir", "sprite": null},
+		{"name": "??", "text": "Ne serait-ce pas merveilleux de s'enivrer avec son équipage sans jamais en subir les conséquences ?", "sprite": null},
+		{"name": "(Voix lointaine)", "text": "Hé j'vous cause ! Ca fait 4 jours que vous z'êtes ici et que tous les soirs vous dormez sur la table", "sprite": null},
+		{"name": "(Voix lointaine)", "text": "S'rait p'têtre temps d'bouger", "sprite": null},
+		{"name": "(Voix lointaine)", "text": "et surtout d'payer", "sprite": null},
+	]
+}

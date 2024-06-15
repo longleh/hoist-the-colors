@@ -1,0 +1,8 @@
+360px de haut
+
+pos_right:
+	- x: 600
+	- y: 180
+pos_left:
+	- x: 120
+	- y: 180

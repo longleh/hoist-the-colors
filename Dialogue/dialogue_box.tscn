@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsevheog527cg"]
+
+[sub_resource type="GDScript" id="GDScript_0xua5"]
+script/source = "extends Node
+
+var dialogue_scene = preload(\"res://Dialogue/container/Dialogue.tscn\")
+
+signal d_start
+signal d_end
+
+func initiate_island_base_dialog(path_to_diag):
+	initiate_dialog(path_to_diag)
+
+func initiate_dialog(path_to_dialog: String):
+	var diag = dialogue_scene.instantiate()
+	diag.set(\"dialog_file\", path_to_dialog)
+	connect_dialog_node_signals(diag)
+	add_child(diag)
+
+func connect_dialog_node_signals(node):
+	node.dialogue_start.connect(_on_dialogue_start)
+	node.dialog_end.connect(_on_dialogue_end)
+
+
+func _on_dialogue_start():
+	d_start.emit()
+
+func _on_dialogue_end():
+	d_end.emit()
+"
+
+[node name="DialogueBox" type="Node"]
+script = SubResource("GDScript_0xua5")

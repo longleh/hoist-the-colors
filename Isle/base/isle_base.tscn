@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://61cp4al3j6sn"]
+
+[ext_resource type="Texture2D" uid="uid://2vsmq3btlmmf" path="res://Isle/textures/PalmierTmp.png" id="1_dxlh1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8q467"]
+radius = 5.0
+height = 26.0
+
+[node name="IsleBase" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_dxlh1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8q467")

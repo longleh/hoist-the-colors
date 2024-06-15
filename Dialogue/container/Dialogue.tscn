@@ -1,0 +1,178 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7m3hapedvau4"]
+
+[ext_resource type="Script" path="res://Dialogue/container/Dialogue.gd" id="1_il0aq"]
+[ext_resource type="Texture2D" uid="uid://dr0nlt7kehho7" path="res://Dialogue/container/DiagBox.png" id="2_1u4kq"]
+[ext_resource type="Texture2D" uid="uid://bsbqlywe2cmsm" path="res://Dialogue/container/more_diag.png" id="3_ndnlb"]
+[ext_resource type="FontFile" uid="uid://dykc5kb6oblig" path="res://common/fonts/LCDBlock.ttf" id="3_qcbm2"]
+
+[sub_resource type="Animation" id="Animation_xtw7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ttloj"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lgnu3"]
+_data = {
+"RESET": SubResource("Animation_xtw7p"),
+"idle": SubResource("Animation_ttloj")
+}
+
+[node name="Dialogue" type="Node"]
+script = ExtResource("1_il0aq")
+dialog_file = "res://Dialogue/dialogues.json"
+
+[node name="FocusBackgroundContainer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="FocusBackground" type="ColorRect" parent="FocusBackgroundContainer"]
+offset_left = -499.0
+offset_top = -216.0
+offset_right = 722.0
+offset_bottom = 644.0
+color = Color(0.207843, 0.227451, 0.396078, 0.254902)
+
+[node name="Base" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
+
+[node name="Chat" type="NinePatchRect" parent="Base"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -60.0
+offset_right = 250.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_1u4kq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Chat" type="RichTextLabel" parent="Base/Chat"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 495.0
+offset_bottom = 46.0
+theme_override_colors/default_color = Color(0.207843, 0.227451, 0.396078, 1)
+theme_override_fonts/normal_font = ExtResource("3_qcbm2")
+theme_override_font_sizes/normal_font_size = 16
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium dictum porta. Sed dapibus ante nec elit dignissim finibus. "
+scroll_active = false
+metadata/_edit_lock_ = true
+
+[node name="NameLeft" type="NinePatchRect" parent="Base"]
+offset_left = 75.0
+offset_top = 287.0
+offset_right = 192.0
+offset_bottom = 303.0
+texture = ExtResource("2_1u4kq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Name" type="RichTextLabel" parent="Base/NameLeft"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 96.0
+offset_bottom = 14.0
+theme_override_colors/default_color = Color(0.207843, 0.227451, 0.396078, 1)
+theme_override_fonts/normal_font = ExtResource("3_qcbm2")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Name"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="NameRight" type="NinePatchRect" parent="Base"]
+offset_left = 449.0
+offset_top = 287.0
+offset_right = 565.0
+offset_bottom = 303.0
+texture = ExtResource("2_1u4kq")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Name" type="RichTextLabel" parent="Base/NameRight"]
+layout_mode = 0
+offset_left = 4.0
+offset_right = 96.0
+offset_bottom = 14.0
+theme_override_colors/default_color = Color(0.207843, 0.227451, 0.396078, 1)
+theme_override_fonts/normal_font = ExtResource("3_qcbm2")
+theme_override_font_sizes/normal_font_size = 16
+text = "Name
+"
+fit_content = true
+scroll_active = false
+metadata/_edit_lock_ = true
+
+[node name="ContinueDialog" type="Sprite2D" parent="Base"]
+visible = false
+z_index = 98
+position = Vector2(557, 340)
+texture = ExtResource("3_ndnlb")
+hframes = 2
+vframes = 2
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Base/ContinueDialog"]
+libraries = {
+"": SubResource("AnimationLibrary_lgnu3")
+}
+
+[node name="RightSpriteContainer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="RightSprite" type="Sprite2D" parent="RightSpriteContainer"]
+visible = false
+position = Vector2(600, 180)
+
+[node name="LeftSpriteContainer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="LeftSprite" type="Sprite2D" parent="LeftSpriteContainer"]
+visible = false
+position = Vector2(120, 180)
+
+[connection signal="dialogue_start" from="." to="." method="_on_dialogue_start"]

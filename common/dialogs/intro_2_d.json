@@ -1,0 +1,20 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"??": "left",
+		"Aubergiste": "right",
+		"\"Capitaine\" Jenkins": "left"
+	},
+	"sprites": {
+		"1": "res://common/sprites/innkeeper_sprite.png"
+	},
+	"chat": [
+		{"name": "??", "text": "Vous vous reveillez au milieu d'une taverne et comprenez mieux pourquoi la Choppe Dorée est apparue dans vos rêves", "sprite": null},
+		{"name": "Aubergiste", "text": "Hé j'vous cause, vous avez bu toute ma bière ou presque et j'ai pas encore vu une seule piécette", "sprite": "1"},
+		{"name": "Aubergiste", "text": "La maison fait pas crédit, maintenant aboule la thune", "sprite": "1"},
+		{"name": "??", "text": "Satanée course de poule... Si seuleument votre favorite ne s'était pas faites écrasée par une ancre", "sprite": null},
+		{"name": "\"Capitaine\" Jenkins", "text": "[Dialogue Sortir Habilement de la situation]", "sprite": null},
+		{"name": "Aubergiste", "text": "Vous allez finir pendu sale pirate. Gardes! GARDES!", "sprite": "1"},
+		{"name": "??", "text": "Vous saisissez l'instant et renversez votre table en insultant l'aubergiste et les habitués de [Nom Insulte]. Créant, ainsi,la confusion autours de vous et en profitez pour vous enfuir et rejoindre votre bâtiment...", "sprite": null},
+	]
+}

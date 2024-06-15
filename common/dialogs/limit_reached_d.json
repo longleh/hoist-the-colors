@@ -1,0 +1,10 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"\"Capitaine\" Jenkins": "left",
+	},
+	"sprites": {},
+	"chat": [
+		{"name": "\"Capitaine\" Jenkins", "text": "Pas par là !", "sprite": null}
+	]
+}

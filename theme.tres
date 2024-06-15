@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://btabb6to3k26g"]
+
+[ext_resource type="FontFile" uid="uid://dykc5kb6oblig" path="res://common/fonts/LCDBlock.ttf" id="1_apn6c"]
+
+[resource]
+Button/font_sizes/font_size = 24
+Button/font_sizes/size_l = 32
+Button/fonts/font = ExtResource("1_apn6c")
+Label/font_sizes/font_size = 24
+Label/font_sizes/size_l = 32
+Label/fonts/font = ExtResource("1_apn6c")

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://byqu84hordcw5"]
+
+[ext_resource type="Theme" uid="uid://btabb6to3k26g" path="res://theme.tres" id="1_4xovq"]
+[ext_resource type="Script" path="res://Menu/menu.gd" id="1_y0370"]
+[ext_resource type="AudioStream" uid="uid://ira70kb17it6" path="res://common/music/main_menu_song.mp3" id="2_k8nc3"]
+[ext_resource type="PackedScene" uid="uid://deuo4tdbbsxa8" path="res://Menu/save.tscn" id="4_5luqx"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4xovq")
+script = ExtResource("1_y0370")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 0
+offset_left = 29.0
+offset_top = 234.0
+offset_right = 179.0
+offset_bottom = 350.0
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_4xovq")
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_4xovq")
+theme_override_font_sizes/font_size = 32
+text = "Restart
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_4xovq")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_k8nc3")
+
+[node name="Save" parent="." instance=ExtResource("4_5luqx")]
+
+[node name="RestartWarning" type="Label" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 183.0
+offset_top = 286.0
+offset_right = 555.0
+offset_bottom = 307.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Attention aucune confirmation ne sera affichée"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Restart" to="." method="_on_restart_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/Restart" to="." method="_on_restart_focus_exited"]
+[connection signal="mouse_entered" from="VBoxContainer/Restart" to="." method="_on_restart_focus_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Restart" to="." method="_on_restart_focus_exited"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

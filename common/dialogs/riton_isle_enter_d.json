@@ -1,0 +1,22 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Algea": "left",
+		"Riton": "right",
+		"?": "right"
+	},
+	"sprites": {
+		"1": "res://common/sprites/pikachu_sprite.png",
+		"2": "res://common/sprites/salameche_sprite.png",
+		"3": "res://common/sprites/sprite_bulbi.png"
+		},
+	"chat": [
+		{"name": "?", "text": "Qui ôse s'avancer sur mon île?", "sprite": null},
+		{"name": "Algea", "text": "Où sont les femmes et le rhum ?", "sprite": "1"},
+		{"name": "Riton", "text": "Je suis un salameche", "sprite": "2"},
+		{"name": "Algea", "text": "Je ne sais pas quoi écrire", "sprite": "1"},
+		{"name": "Riton", "text": "Je suis un bulbizare", "sprite": "3"},
+		{"name": "Algea", "text": "Ceci est lu depuis un JSON", "sprite": "1"},
+		{"name": "Algea", "text": "Ciao mon sprite disparait", "sprite": null}
+	]
+}

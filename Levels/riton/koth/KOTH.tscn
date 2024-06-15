@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://pyluwl6psqio"]
+
+[ext_resource type="Script" path="res://Levels/riton/koth/KOTH.gd" id="1_d5unk"]
+[ext_resource type="PackedScene" uid="uid://6xytonx1eklj" path="res://Levels/riton/Shandr/Shandr.tscn" id="2_2f5x6"]
+[ext_resource type="PackedScene" uid="uid://bj3uqo1ldu4xg" path="res://Menu/pause_menu_orchestrator.tscn" id="3_x4ye2"]
+
+[sub_resource type="Curve2D" id="Curve2D_qvb4j"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -10, -1, 0, 0, 0, 0, -10, 365, 0, 0, 0, 0, 649, 368, 0, 0, 0, 0, 649, -12, 0, 0, 0, 0, -10, -15, 0, 0, 0, 0, -10, -5)
+}
+point_count = 6
+
+[node name="Koth" type="Node2D"]
+script = ExtResource("1_d5unk")
+
+[node name="WorldBorder" type="StaticBody2D" parent="."]
+collision_layer = 2
+metadata/_edit_lock_ = true
+
+[node name="WorldBorderCollision" type="CollisionPolygon2D" parent="WorldBorder"]
+polygon = PackedVector2Array(0, 0, 0, 360, 640, 360, 640, 0, 8, 0, 8, -8, 648, -8, 648, 56, 648, 256, 648, 368, 448, 368, 256, 368, -8, 368, -8, -8, 8, 0)
+
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MobSpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_qvb4j")
+
+[node name="MobSpawnerLocation" type="PathFollow2D" parent="MobSpawnPath"]
+position = Vector2(-10, -1)
+rotation = 1.5708
+
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Shandr" parent="YSort" instance=ExtResource("2_2f5x6")]
+position = Vector2(351, 150)
+collision_mask = 7
+
+[node name="PauseMenuOrchestrator" parent="." instance=ExtResource("3_x4ye2")]
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="sword_hit" from="YSort/Shandr" to="." method="_on_shandr_sword_hit"]
