@@ -1,0 +1,31 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Capitaine Jenkins": "left",
+		"Shandrïs": "left",
+		"?": "left",
+		"Riton": "right",
+	},
+	"sprites": {
+		"1": "res://common/sprites/drum_talk.png",
+		"2": "res://common/sprites/shandr_talk.png",
+		"3": "res://common/sprites/drum_cast.png"
+		},
+	"chat": [
+		{"name": "Riton", "text": "Heureusement que nous sommes arrivés, vous sembliez mal en point", "sprite":  "1"},
+		{"name": "Shandrïs", "text": "Pas du tout j'étais entrain de gérer", "sprite":  "2"},
+		{"name": "Shandrïs", "text": "Pouvez-vous me rendre mon apparence maintenant ?", "sprite":  "2"},
+		{"name": "Riton", "text": "(Ré-agite ses mains dans tous les sens)", "sprite":  "3"},
+		{"name": "Riton", "text": "Tenez", "sprite":  "1"},
+		{"name": "Riton", "text": "(Vous retrouvez votre apparence normale, vous vous souviendrez qu'il ne faut jamais prendre une potion de Riton)", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Et maintenant quelle est ma récompense ? Où sont les femmes, le rhum et l'or ?", "sprite":  null},
+		{"name": "Riton", "text": "Je suis votre récompense !", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Eh bien ma fois, je suis désolé de vous apprendre que mon coeur est déjà pris", "sprite":  null},
+		{"name": "Riton", "text": "(Semble déséspéré...)", "sprite":  "1"},
+		{"name": "Riton", "text": "Je ne parle pas de ça... Si c'était le cas je vous aurez au moins montré les Îles de l'Écho qui sont un lieu de mariage réputé", "sprite":  "1"},
+		{"name": "Riton", "text": "Mais selon le rapport des soldats votre bateau était bien vide, je me propose donc en tant que second", "sprite":  "1"},
+		{"name": "Riton", "text": "Votre \"courage\" a sauvé de nombreux soldats et maintenant que les orcs sont \"démocratisé\" je n'ai plus rien à faire ici", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Hum... Pourquoi pas après tout, mais plus jamais une potion à boire !", "sprite":  null},
+		{"name": "?", "text": "Riton rejoint votre Equipage en tant que Second", "sprite":  null },
+	]
+}

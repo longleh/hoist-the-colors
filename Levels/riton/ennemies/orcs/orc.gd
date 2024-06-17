@@ -89,6 +89,9 @@ func _on_despawn_timer_timeout():
 	
 func stop():
 	current_state = INACTIVE
+	$Hurtbox.disabled = true
 	
 func resume():
 	current_state = SPAWNED
+	$Hurtbox.disabled = false
+

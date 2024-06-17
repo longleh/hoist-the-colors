@@ -46,11 +46,12 @@ func _on_dialog_start():
 	ship.stop_movement()
 
 func _on_dialog_end():
-	ship.resume_movement()
 	if current_island && !current_island["node"].get_visited():
 		# current_island["node"].set_visited(true)
 		$Save.save()
 		current_island["node"].load_level()
+	else:
+		ship.resume_movement()
 
 func _on_isle_touched(isle_name):
 	current_island = islands[ISLANDS.get(isle_name)]
@@ -60,6 +61,7 @@ func _on_isle_touched(isle_name):
 
 func _on_isle_leaved(_isle_name):
 	current_island = null
+	$Save.save()
 
 func save():
 	var save_dict = {

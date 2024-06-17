@@ -13,11 +13,13 @@ config_version=5
 config/name="Hoist the colours!"
 run/main_scene="res://Menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=144
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=2
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"

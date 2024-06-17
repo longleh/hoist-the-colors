@@ -120,3 +120,5 @@ func end_dialog():
 	dialog_started = false
 	focus_background.visible = false
 	base.visible = false
+	$RightSpriteContainer.visible = false
+	$LeftSpriteContainer.visible = false

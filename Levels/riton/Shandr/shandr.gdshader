@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform bool invulnerable = false;
 uniform bool dead = false;
-uniform bool heal = true;
+uniform bool heal = false;
 
 void fragment() {
 	vec4 previous_color = texture(TEXTURE, UV);

@@ -18,7 +18,6 @@ func _ready():
 	shandr.stop_movement()
 	number_of_ennemies = MAXIMUM_ENNEMIES * 2
 	number_of_pickups = MAXIMUM_PICKUPS * 2
-	
 
 func _on_mob_timer_timeout():
 	if number_of_ennemies < MAXIMUM_ENNEMIES:

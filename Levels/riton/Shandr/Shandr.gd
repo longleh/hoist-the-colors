@@ -155,9 +155,13 @@ func revive():
 
 func heal():
 	$HPBar.visible = true
+	$HealSound.playing = true
 	var tween = get_tree().create_tween()
 	tween.tween_method(_inner_heal, hitpoint, 10, 1)
-	tween.tween_callback(func():_end_invicibility())
+	tween.tween_callback(func():
+		$HealSound.playing = false
+		_end_invicibility()
+	)
 	$AnimationPlayer.play("heal")
 	
 func _inner_heal(value):

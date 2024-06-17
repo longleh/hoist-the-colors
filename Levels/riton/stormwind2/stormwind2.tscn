@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd5wu5d26qnv0"]
+
+[ext_resource type="Script" path="res://Levels/riton/stormwind2/stormwind2.gd" id="1_50j3r"]
+[ext_resource type="Texture2D" uid="uid://dbgcntruvqffa" path="res://Levels/riton/stormwind/bg_storm.jpg" id="1_kdkwi"]
+[ext_resource type="AudioStream" uid="uid://bpco33phlyt3t" path="res://Levels/riton/stormwind/Stormwind - Original Wow Music.mp3" id="2_8p5lr"]
+[ext_resource type="PackedScene" uid="uid://b7m3hapedvau4" path="res://Dialogue/container/Dialogue.tscn" id="3_wd1oh"]
+
+[node name="Stormwind2" type="Node2D"]
+script = ExtResource("1_50j3r")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kdkwi")
+expand_mode = 1
+
+[node name="ArrivalDialogTimer" type="Timer" parent="."]
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_8p5lr")
+volume_db = -5.0
+
+[node name="ArrivalDialog" parent="." instance=ExtResource("3_wd1oh")]
+dialog_file = "res://common/dialogs/riton_sw2.json"
+
+[connection signal="timeout" from="ArrivalDialogTimer" to="." method="_on_arrival_dialog_timer_timeout"]
+[connection signal="dialog_end" from="ArrivalDialog" to="." method="_on_arrival_dialog_dialog_end"]
