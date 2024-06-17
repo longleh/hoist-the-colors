@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv5a82d8ox28d"]
+
+[ext_resource type="Script" path="res://Levels/riton/ironforge/Ironforge.gd" id="1_vk25s"]
+[ext_resource type="Texture2D" uid="uid://cppvlwvbrxfc8" path="res://Levels/riton/ironforge/1354243.png" id="2_5tsfl"]
+[ext_resource type="AudioStream" uid="uid://doyy21ugdi7h8" path="res://Levels/riton/ironforge/Kun Joulu On (Acoustic Version).mp3" id="3_n3sjd"]
+[ext_resource type="PackedScene" uid="uid://b7m3hapedvau4" path="res://Dialogue/container/Dialogue.tscn" id="4_5akpt"]
+
+[node name="Ironforge" type="Node2D"]
+script = ExtResource("1_vk25s")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5tsfl")
+expand_mode = 1
+
+[node name="ArrivalDialogTimer" type="Timer" parent="."]
+
+[node name="BGMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_n3sjd")
+volume_db = -5.0
+
+[node name="ArrivalDialog" parent="." instance=ExtResource("4_5akpt")]
+dialog_file = "res://common/dialogs/riton_if_arrival.json"
+
+[connection signal="timeout" from="ArrivalDialogTimer" to="." method="_on_arrival_dialog_timer_timeout"]
+[connection signal="dialog_end" from="ArrivalDialog" to="." method="_on_arrival_dialog_dialog_end"]

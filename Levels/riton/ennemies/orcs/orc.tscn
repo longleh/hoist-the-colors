@@ -1,11 +1,19 @@
-[gd_scene load_steps=28 format=3 uid="uid://crnhfx6itfvt6"]
+[gd_scene load_steps=31 format=3 uid="uid://crnhfx6itfvt6"]
 
 [ext_resource type="Texture2D" uid="uid://c54ykkrcj1q48" path="res://Levels/riton/ennemies/sprites/orc_sprite.png" id="1_8gp5c"]
 [ext_resource type="Script" path="res://Levels/riton/ennemies/orcs/orc.gd" id="1_c4432"]
+[ext_resource type="Shader" path="res://Levels/riton/ennemies/orcs/orc_hit.gdshader" id="2_gwtid"]
+[ext_resource type="AudioStream" uid="uid://3au8ueg0ywpp" path="res://Levels/riton/ennemies/orcs/OrcMaleDeath.ogg" id="4_g8jb0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mx4l2"]
+resource_local_to_scene = true
+shader = ExtResource("2_gwtid")
+shader_parameter/hit = false
+shader_parameter/death = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0qv35"]
-radius = 27.0
-height = 70.0
+radius = 19.75
+height = 54.0
 
 [sub_resource type="Animation" id="Animation_bn6y0"]
 length = 0.001
@@ -224,26 +232,29 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ixbw7"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h2iv0"]
+states/End/position = Vector2(698, 93)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_1m4sd")
 states/Idle/position = Vector2(355, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_yfh16")
 states/Run/position = Vector2(548, 100)
 states/Start/position = Vector2(197, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_nlfba"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_d8sf5"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_ixbw7")]
+graph_offset = Vector2(27, -2)
 
-[node name="Orc" type="CharacterBody2D"]
+[node name="Orc" type="CharacterBody2D" groups=["ennemies"]]
 scale = Vector2(0.8, 0.8)
 collision_layer = 8
-collision_mask = 16
+collision_mask = 48
 script = ExtResource("1_c4432")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mx4l2")
 texture = ExtResource("1_8gp5c")
 hframes = 9
 vframes = 4
 frame = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -2)
 shape = SubResource("CapsuleShape2D_0qv35")
 
@@ -257,3 +268,22 @@ tree_root = SubResource("AnimationNodeStateMachine_h2iv0")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(-0.0838548, -0.154185)
 parameters/Run/blend_position = Vector2(0.00876093, 0.0396476)
+
+[node name="Invulnerability" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="NewTargetTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(1.25, 1.25)
+stream = ExtResource("4_g8jb0")
+
+[connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]
+[connection signal="timeout" from="NewTargetTimer" to="." method="_on_new_target_timer_timeout"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

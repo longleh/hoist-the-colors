@@ -1,14 +1,14 @@
 {
 	"id": "base_isle",
 	"layout": {
-		"\"Capitaine\" Jenkins": "left",
+		"Capitaine Jenkins": "left",
 	},
 	"sprites": {},
 	"chat": [
-		{"name": "\"Capitaine\" Jenkins", "text": "Ce tavernier est bien courageux, oser s'attaquer au grand Capitaine Jenkins c'est encourir de grands risques.", "sprite": null},
-		{"name": "\"Capitaine\" Jenkins", "text": "Et la garde fut encore plus chanceuse que mon épée se soit émoussée. Ce qui est tout à fait normal après avoir supprimé les 150 premiers gardes", "sprite": null},
-		{"name": "\"Capitaine\" Jenkins", "text": "Si seuleument j'avais eu un équipage avec moi...", "sprite": null},
-		{"name": "\"Capitaine\" Jenkins", "text": "Bref... Il y a quelques îles plus loin, je devrai y faire un tour pour compléter ma gar...", "sprite": null},
-		{"name": "\"Capitaine\" Jenkins", "text": "...mon équipage !", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Ce tavernier est bien courageux, oser s'attaquer au grand Capitaine Jenkins c'est encourir de grands risques.", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Et la garde fut encore plus chanceuse que mon épée se soit émoussée. Ce qui est tout à fait normal après avoir supprimé les 150 premiers gardes", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Si seuleument j'avais eu un équipage avec moi...", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Bref... Il y a quelques îles plus loin, je devrai y faire un tour pour compléter ma gar...", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "...mon équipage !", "sprite": null},
 	]
 }

@@ -1,0 +1,13 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Shandrïs": "left",
+		"Riton": "right",
+	},
+	"sprites": {
+		"1": "res://common/sprites/shandr_talk.png",
+		},
+	"chat": [
+		{"name": "Shandrïs", "text": "Ils sont trop nombreux... Je ne tiendrai pas longtemps", "sprite": "1"},
+	]
+}

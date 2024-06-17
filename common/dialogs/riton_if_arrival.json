@@ -1,0 +1,31 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Capitaine Jenkins": "left",
+		"Riton": "right",
+		"?": "left"
+	},
+	"sprites": {
+		"1": "res://common/sprites/drum_talk.png",
+		"2": "res://common/sprites/drum_cast.png",
+		"3": "res://common/sprites/shandr_roar.png",
+		"4": "res://common/sprites/shandr_talk.png"
+		},
+	"chat": [
+		{"name": "Riton", "text": "Bien, nous sommes proche de leur trou à rat", "sprite":  "1"},
+		{"name": "Riton", "text": "(Fait des gestes bizarres avec ses mains)", "sprite":  "2"},
+		{"name": "Riton", "text": "Avant de commencer j'aimerai que vous buviez ceci", "sprite":  "1"},
+		{"name": "?", "text": "(Le drôle de petit personnage vous donne une fiole contenant un liquide violet pétillant à l'aspect inquiétant)", "sprite":  null},
+		{"name": "Capitaine Jenkins", "text": "Qu'est ce que c'est ?", "sprite":  null},
+		{"name": "Riton", "text": "Une potion de furtivité *marmonne* Je ne peux garantir les effets secondaires", "sprite":  "1"},
+		{"name": "?", "text": "(Avec un peu chance ça a le même goût que la bière... Vous buvez d'un seul coup le contenu de la fiole... C'est dégueulasse)", "sprite":  null},
+		{"name": "?", "text": "(Vous commencez à ressentir un picotement parcourant votre corps)", "sprite":  null},
+		{"name": "?", "text": "(Votre peau prend la couleur de la potion, des oreilles pointues poussent, des ... seins ?!)", "sprite":  null},
+		{"name": "Capitaine Jenkins", "text": "Qu'est ce que vous m'avez fait ?!?!", "sprite":  "3"},
+		{"name": "Riton", "text": "Je vous avez dit que les effets secondaires ne pouvaient être garantis", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Rendez moi mon apparence !!!", "sprite":  "3"},
+		{"name": "Riton", "text": "Ne vous enervez pas, une fois la bataille terminée je vous rendez votre apparence", "sprite":  "1"},
+		{"name": "Riton", "text": "D'ailleurs voici votre matricule de soldat", "sprite":  "1"},
+		{"name": "?", "text": "(Le matricule affiche l'identifiant \"Ghost10klmbp\" et le nom de \"Shandrïs\"", "sprite":  null},
+	]
+}

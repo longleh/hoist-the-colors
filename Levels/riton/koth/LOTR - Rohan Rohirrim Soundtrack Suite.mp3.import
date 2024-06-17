@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhk4qo2wjibhe"
+path="res://.godot/imported/LOTR - Rohan Rohirrim Soundtrack Suite.mp3-4dd49a1e7390e942b30d1962b1fa5ebd.mp3str"
+
+[deps]
+
+source_file="res://Levels/riton/koth/LOTR - Rohan Rohirrim Soundtrack Suite.mp3"
+dest_files=["res://.godot/imported/LOTR - Rohan Rohirrim Soundtrack Suite.mp3-4dd49a1e7390e942b30d1962b1fa5ebd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

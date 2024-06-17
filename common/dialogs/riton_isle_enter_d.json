@@ -1,22 +1,19 @@
 {
 	"id": "base_isle",
 	"layout": {
-		"Algea": "left",
-		"Riton": "right",
-		"?": "right"
+		"Capitaine Jenkins": "left",
+		"?": "left",
+		"Garde": "right"
 	},
-	"sprites": {
-		"1": "res://common/sprites/pikachu_sprite.png",
-		"2": "res://common/sprites/salameche_sprite.png",
-		"3": "res://common/sprites/sprite_bulbi.png"
-		},
+	"sprites": {},
 	"chat": [
-		{"name": "?", "text": "Qui ôse s'avancer sur mon île?", "sprite": null},
-		{"name": "Algea", "text": "Où sont les femmes et le rhum ?", "sprite": "1"},
-		{"name": "Riton", "text": "Je suis un salameche", "sprite": "2"},
-		{"name": "Algea", "text": "Je ne sais pas quoi écrire", "sprite": "1"},
-		{"name": "Riton", "text": "Je suis un bulbizare", "sprite": "3"},
-		{"name": "Algea", "text": "Ceci est lu depuis un JSON", "sprite": "1"},
-		{"name": "Algea", "text": "Ciao mon sprite disparait", "sprite": null}
+		{"name": "Garde", "text": "Halte qui va là ?", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Je suis le capitaine Jenkins, le plus grand pirate que cette terre est connu", "sprite": null},
+		{"name": "Garde", "text": "Jamais entendu parler...", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "En temps normal j'aurai puni un telle insolence mais malheureusement mon arme est émoussée", "sprite": null},
+		{"name": "Garde", "text": "C'est ça oui...", "sprite": null},
+		{"name": "Garde", "text": "Si vous savez vous battre, on a peut être de boulot pour vous", "sprite": null},
+		{"name": "?", "text": "(Vous vous souvenez à quel point les caisses sont vides)", "sprite": null},
+		{"name": "Capitaine Jenkins", "text": "Très bien allons-y", "sprite": null},
 	]
 }

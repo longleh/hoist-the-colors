@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://yr2eovp7v8c1"
+path="res://.godot/imported/Arrival horn of Rohan army.ogg-828fef80ee72eac949e4f19138bc8f8a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Levels/riton/koth/Arrival horn of Rohan army.ogg"
+dest_files=["res://.godot/imported/Arrival horn of Rohan army.ogg-828fef80ee72eac949e4f19138bc8f8a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

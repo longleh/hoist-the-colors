@@ -1,8 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://pyluwl6psqio"]
+[gd_scene load_steps=13 format=3 uid="uid://pyluwl6psqio"]
 
 [ext_resource type="Script" path="res://Levels/riton/koth/KOTH.gd" id="1_d5unk"]
 [ext_resource type="PackedScene" uid="uid://6xytonx1eklj" path="res://Levels/riton/Shandr/Shandr.tscn" id="2_2f5x6"]
 [ext_resource type="PackedScene" uid="uid://bj3uqo1ldu4xg" path="res://Menu/pause_menu_orchestrator.tscn" id="3_x4ye2"]
+[ext_resource type="Theme" uid="uid://btabb6to3k26g" path="res://theme.tres" id="4_716ey"]
+[ext_resource type="AudioStream" uid="uid://b5nkm85l0vj7p" path="res://Levels/riton/koth/Nightwish - Nightquest (Official Audio).mp3" id="5_80kf5"]
+[ext_resource type="AudioStream" uid="uid://ufhpx7033a5e" path="res://Levels/riton/koth/death_screen_bg.mp3" id="6_47cr1"]
+[ext_resource type="Texture2D" uid="uid://b32qrtiro7b8d" path="res://Levels/riton/koth/orc_sprite_dead.png" id="7_d0u81"]
+[ext_resource type="Texture2D" uid="uid://cepls4t1hjnic" path="res://Levels/riton/koth/grass_bg.png" id="8_ptult"]
+[ext_resource type="AudioStream" uid="uid://yr2eovp7v8c1" path="res://Levels/riton/koth/Arrival horn of Rohan army.ogg" id="9_06kyp"]
+[ext_resource type="PackedScene" uid="uid://b7m3hapedvau4" path="res://Dialogue/container/Dialogue.tscn" id="10_dtj1g"]
+[ext_resource type="AudioStream" uid="uid://bhk4qo2wjibhe" path="res://Levels/riton/koth/LOTR - Rohan Rohirrim Soundtrack Suite.mp3" id="10_hel8j"]
 
 [sub_resource type="Curve2D" id="Curve2D_qvb4j"]
 _data = {
@@ -21,7 +29,7 @@ metadata/_edit_lock_ = true
 polygon = PackedVector2Array(0, 0, 0, 360, 640, 360, 640, 0, 8, 0, 8, -8, 648, -8, 648, 56, 648, 256, 648, 368, 448, 368, 256, 368, -8, 368, -8, -8, 8, 0)
 
 [node name="MobTimer" type="Timer" parent="."]
-autostart = true
+wait_time = 0.6
 
 [node name="MobSpawnPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_qvb4j")
@@ -34,10 +42,152 @@ rotation = 1.5708
 y_sort_enabled = true
 
 [node name="Shandr" parent="YSort" instance=ExtResource("2_2f5x6")]
-position = Vector2(351, 150)
-collision_mask = 7
+position = Vector2(320, 130)
 
 [node name="PauseMenuOrchestrator" parent="." instance=ExtResource("3_x4ye2")]
 
+[node name="GameoverScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 100
+visible = false
+
+[node name="Background" type="ColorRect" parent="GameoverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="GameoverScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameoverScreen/CenterContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GameoverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_716ey")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="GameoverScreen/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="GameoverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_716ey")
+theme_override_font_sizes/font_size = 32
+text = "Restart"
+
+[node name="Skip" type="Button" parent="GameoverScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_716ey")
+theme_override_font_sizes/font_size = 32
+text = "Skip"
+
+[node name="Deathtimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="nw_background" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_80kf5")
+volume_db = -5.0
+
+[node name="deathscreen_bg" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_47cr1")
+
+[node name="Scoreboard" type="HBoxContainer" parent="."]
+offset_right = 77.0
+offset_bottom = 64.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Scoreboard"]
+layout_mode = 2
+texture = ExtResource("7_d0u81")
+stretch_mode = 2
+
+[node name="Score" type="Label" parent="Scoreboard"]
+layout_mode = 2
+theme = ExtResource("4_716ey")
+text = "0"
+
+[node name="PickupSpawnTimer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 255.0
+
+[node name="Timer" type="Label" parent="."]
+offset_left = 598.0
+offset_top = 3.0
+offset_right = 638.0
+offset_bottom = 26.0
+theme = ExtResource("4_716ey")
+text = "4:15"
+horizontal_alignment = 2
+
+[node name="UpdateTimer" type="Timer" parent="."]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+z_index = -50
+offset_left = -53.0
+offset_top = -203.0
+offset_right = 697.0
+offset_bottom = 547.0
+texture = ExtResource("8_ptult")
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+z_index = -49
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 1000.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="AllianceArrivalHorns" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_06kyp")
+volume_db = -10.0
+
+[node name="AllianceBGSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_hel8j")
+volume_db = -10.0
+
+[node name="IntroDialogue" parent="." instance=ExtResource("10_dtj1g")]
+dialog_file = "res://common/dialogs/riton_koth_arrival.json"
+
+[node name="IntroVictoryDialogue" parent="." instance=ExtResource("10_dtj1g")]
+dialog_file = "res://common/dialogs/riton_koth_intro_victory.json"
+
+[node name="VictoryDialogue" parent="." instance=ExtResource("10_dtj1g")]
+dialog_file = "res://common/dialogs/riton_koth_victory.json"
+
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="death" from="YSort/Shandr" to="." method="_on_shandr_death"]
 [connection signal="sword_hit" from="YSort/Shandr" to="." method="_on_shandr_sword_hit"]
+[connection signal="pressed" from="GameoverScreen/CenterContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameoverScreen/CenterContainer/VBoxContainer/Skip" to="." method="_on_skip_pressed"]
+[connection signal="timeout" from="Deathtimer" to="." method="_on_deathtimer_timeout"]
+[connection signal="timeout" from="PickupSpawnTimer" to="." method="_on_pickup_spawn_timer_timeout"]
+[connection signal="timeout" from="LevelTimer" to="." method="_on_level_timer_timeout"]
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
+[connection signal="finished" from="AllianceArrivalHorns" to="." method="_on_alliance_arrival_horns_finished"]
+[connection signal="finished" from="AllianceBGSound" to="." method="_on_alliance_arrival_horns_finished"]
+[connection signal="dialog_end" from="IntroDialogue" to="." method="_on_intro_dialogue_dialog_end"]
+[connection signal="dialog_end" from="IntroVictoryDialogue" to="." method="_on_intro_victory_dialogue_dialog_end"]
+[connection signal="dialog_end" from="VictoryDialogue" to="." method="_on_victory_dialogue_dialog_end"]

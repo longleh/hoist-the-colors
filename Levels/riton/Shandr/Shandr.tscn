@@ -1,7 +1,20 @@
-[gd_scene load_steps=42 format=3 uid="uid://6xytonx1eklj"]
+[gd_scene load_steps=55 format=3 uid="uid://6xytonx1eklj"]
 
 [ext_resource type="Script" path="res://Levels/riton/Shandr/Shandr.gd" id="1_bs885"]
 [ext_resource type="Texture2D" uid="uid://cyu74s4wem678" path="res://Levels/riton/shandr.png" id="1_kodbj"]
+[ext_resource type="Shader" path="res://Levels/riton/Shandr/shandr.gdshader" id="2_6if5i"]
+[ext_resource type="AudioStream" uid="uid://ci1xlvpf0jxj7" path="res://Levels/riton/Shandr/weapon_swing.ogg" id="3_gdf2g"]
+[ext_resource type="AudioStream" uid="uid://bt2lo5mot8egk" path="res://Levels/riton/Shandr/hit.ogg" id="5_12ols"]
+[ext_resource type="Theme" uid="uid://btabb6to3k26g" path="res://theme.tres" id="5_gpmf4"]
+[ext_resource type="AudioStream" uid="uid://bxpu3miab7lfk" path="res://Levels/riton/Shandr/shandr_death.ogg" id="6_ct1ud"]
+[ext_resource type="Script" path="res://Levels/riton/Shandr/camera.gd" id="6_u3u8q"]
+[ext_resource type="AudioStream" uid="uid://bpka13f245dbq" path="res://Levels/riton/Shandr/heal.mp3" id="7_2twsi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ai2e"]
+shader = ExtResource("2_6if5i")
+shader_parameter/invulnerable = false
+shader_parameter/dead = false
+shader_parameter/heal = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3g5up"]
 radius = 5.0
@@ -69,6 +82,68 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material:shader_parameter/invulnerable")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitSound:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("DeathSound:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HealSound:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_invicibility"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_55ebf"]
 resource_name = "attack_down"
@@ -132,6 +207,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.6, 0.6)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_elduw"]
@@ -197,6 +286,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ca62t"]
 resource_name = "attack_right"
@@ -261,6 +364,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0, 0.0]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_nvl2w"]
 resource_name = "attack_up"
@@ -324,6 +441,62 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.5708, 0.0]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1myrw"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeathSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cvroa"]
+resource_name = "heal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/heal")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_up4r2"]
@@ -392,6 +565,47 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_f1rx7"]
+resource_name = "invulnerability"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/invulnerable")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_end_invicibility"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_okfhk"]
@@ -469,10 +683,13 @@ _data = {
 "attack_left": SubResource("Animation_elduw"),
 "attack_right": SubResource("Animation_ca62t"),
 "attack_up": SubResource("Animation_nvl2w"),
+"death": SubResource("Animation_1myrw"),
+"heal": SubResource("Animation_cvroa"),
 "idle_down": SubResource("Animation_up4r2"),
 "idle_left": SubResource("Animation_xkmpc"),
 "idle_right": SubResource("Animation_7vr1l"),
 "idle_up": SubResource("Animation_130ng"),
+"invulnerability": SubResource("Animation_f1rx7"),
 "run_down": SubResource("Animation_okfhk"),
 "run_left": SubResource("Animation_ksftx"),
 "run_right": SubResource("Animation_oo6y2"),
@@ -566,7 +783,7 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a46wh"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_rj0wi")
 states/Attack/position = Vector2(540, 190)
-states/End/position = Vector2(648, 116)
+states/End/position = Vector2(649, 116)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_cqf8c")
 states/Idle/position = Vector2(352, 100)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_i5r6h")
@@ -576,15 +793,25 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ol5w"]
 height = 40.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wr72b"]
+radius = 7.0
+height = 21.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqpcp"]
+bg_color = Color(0.0588235, 1, 0.313726, 1)
+
 [node name="Shandr" type="CharacterBody2D"]
+collision_mask = 39
 script = ExtResource("1_bs885")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3ai2e")
 texture = ExtResource("1_kodbj")
 hframes = 6
 vframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3g5up")
@@ -602,6 +829,7 @@ parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Run/blend_position = Vector2(0, 0)
 
 [node name="SwordHitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 8
 
@@ -610,5 +838,51 @@ position = Vector2(6, 20)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CapsuleShape2D_1ol5w")
 
-[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_player_animation_finished"]
+[node name="WeaponSwing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gdf2g")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_wr72b")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_12ols")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 320
+position_smoothing_enabled = true
+script = ExtResource("6_u3u8q")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ct1ud")
+
+[node name="HealSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_2twsi")
+volume_db = 20.0
+
+[node name="HPBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -17.0
+offset_top = -21.0
+offset_right = 18.0
+offset_bottom = -18.0
+theme = ExtResource("5_gpmf4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bqpcp")
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="HPBarDisplayTime" type="Timer" parent="."]
+
 [connection signal="body_shape_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_shape_entered"]
+[connection signal="body_shape_entered" from="Hurtbox" to="." method="_on_hurtbox_body_shape_entered"]
+[connection signal="body_shape_exited" from="Hurtbox" to="." method="_on_hurtbox_body_shape_exited"]
+[connection signal="timeout" from="HPBarDisplayTime" to="." method="_on_hp_bar_display_time_timeout"]

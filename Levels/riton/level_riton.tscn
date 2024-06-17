@@ -1,12 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://cld71r5mw4xnw"]
-
-[ext_resource type="PackedScene" uid="uid://pyluwl6psqio" path="res://Levels/riton/koth/KOTH.tscn" id="1_jliif"]
+[gd_scene load_steps=2 format=3 uid="uid://cld71r5mw4xnw"]
 
 [sub_resource type="GDScript" id="GDScript_fdd8i"]
 script/source = "extends Node2D
+
+signal island_level_ended(isle_name)
+
+@onready var levels = [
+	preload(\"res://Levels/riton/stormwind/Stormwind.tscn\"),
+	preload(\"res://Levels/riton/ironforge/Ironforge.tscn\"),
+	preload(\"res://Levels/riton/koth/KOTH.tscn\")
+]
+
+var current_level_index = 0
+
+func play_next_level():
+	if current_level_index < levels.size():
+		var current_level = levels[current_level_index].instantiate()
+		current_level.connect(\"level_ended\", play_next_level)
+		add_child(current_level)
+		current_level.start()
+		current_level_index += 1
+	else:
+		island_level_ended.emit(\"RITON\")
+
+func _on_level_ended():
+	play_next_level()
+
+func _ready():
+	play_next_level()
+
 "
 
 [node name="LevelRiton" type="Node2D"]
 script = SubResource("GDScript_fdd8i")
-
-[node name="Koth" parent="." instance=ExtResource("1_jliif")]

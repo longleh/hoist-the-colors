@@ -82,7 +82,10 @@ shandr_attack={
 2d_physics/layer_3="area"
 2d_physics/layer_4="ennemies"
 2d_physics/layer_5="sword"
+2d_physics/layer_6="player_hurtbox"
+2d_physics/layer_7="pickups"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+anti_aliasing/quality/msaa_2d=3

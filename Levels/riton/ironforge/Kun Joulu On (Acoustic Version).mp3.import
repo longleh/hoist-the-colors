@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://doyy21ugdi7h8"
+path="res://.godot/imported/Kun Joulu On (Acoustic Version).mp3-97a9216af4a34129bbe4326acbb7ba47.mp3str"
+
+[deps]
+
+source_file="res://Levels/riton/ironforge/Kun Joulu On (Acoustic Version).mp3"
+dest_files=["res://.godot/imported/Kun Joulu On (Acoustic Version).mp3-97a9216af4a34129bbe4326acbb7ba47.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

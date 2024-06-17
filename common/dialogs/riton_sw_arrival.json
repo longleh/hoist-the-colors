@@ -1,0 +1,23 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Capitaine Jenkins": "left",
+		"Riton": "right",
+	},
+	"sprites": {
+		"1": "res://common/sprites/drum_talk.png",
+		},
+	"chat": [
+		{"name": "Riton", "text": "Bien le bonjour \"Capitaine\", on m'a dit que vous vouliez vous battre", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Je ne dis jamais non à la baguarre, j'en ai même inventé son jus", "sprite":  null},
+		{"name": "Riton", "text": "(Ne semble pas comprendre)", "sprite":  "1"},
+		{"name": "Riton", "text": "Bien bien, tout d'abord bienvenue à Htoreza", "sprite":  "1"},
+		{"name": "Riton", "text": "Cette cité était autrefois démocratique et écra... répendait la démocratie sur toute l'île", "sprite":  "1"},
+		{"name": "Riton", "text": "Nous avions pacifié l'ensemble de l'île mais récemment les orcs du clan \"Or II\" nous on montré une sacrée résistance", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "C'est le deuxième clan \"Or\" ?", "sprite":  null},
+		{"name": "Riton", "text": "Pas du tout, les orcs sont justes cons", "sprite":  "1"},
+		{"name": "Riton", "text": "Nous avons repéré leur camp dans colline d'Ihtara, nous avons besoin de fier soldats comme vous", "sprite":  "1"},
+		{"name": "Capitaine Jenkins", "text": "Je ne suis ni l'un ni l'autre mais je déteste les peaux vertes", "sprite":  null},
+		{"name": "Riton", "text": "Hum... vous ferez l'affaire... suivez-moi", "sprite":  "1"},
+	]
+}

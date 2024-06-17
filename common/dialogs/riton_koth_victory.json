@@ -1,0 +1,26 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Shandrïs": "left",
+		"Riton": "right",
+		"Soldats": "right",
+	},
+	"sprites": {
+		"1": "res://common/sprites/drum_talk.png",
+		"2": "res://common/sprites/drum_vener.png",
+		"3": "res://common/sprites/shandr_talk.png"
+		},
+	"chat": [
+		{"name": "Shandrïs", "text": "Qu'est ce que ?!", "sprite": null},
+		{"name": "Riton", "text": "Eomer mène ton éored au pied du flanc gauche", "sprite": "1"},
+		{"name": "Riton", "text": "Gamlin suivez l'étendard du roi au centre", "sprite": "1"},
+		{"name": "Riton", "text": "Grimmbold menez votre compagnie à droite", "sprite": "1"},
+		{"name": "Riton", "text": "En avant! Ne craignez aucune obscurité", "sprite": "2"},
+		{"name": "Riton", "text": "Debout! Debout cavalier de l'Alliance", "sprite": "2"},
+		{"name": "Riton", "text": "Les lances seront secouées, les boucliers voleront en éclat", "sprite": "2"},
+		{"name": "Riton", "text": "Une journée de l'épée, une journée rouge avant que le soleil ne se lève", "sprite": "2"},
+		{"name": "Riton", "text": "Au galop, au galop! Courrez, courrez à la ruine et à la fin du monde", "sprite": "2"},
+		{"name": "Riton", "text": "A moooort !", "sprite": "2"},
+		{"name": "Soldats", "text": "A moooort !", "sprite": null},
+	]
+}

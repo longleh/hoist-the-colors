@@ -1,0 +1,18 @@
+{
+	"id": "base_isle",
+	"layout": {
+		"Shandrïs": "left",
+		"?": "left",
+		"Orc": "right",
+	},
+	"sprites": {
+		"1": "res://common/sprites/shandr_talk.png"
+		},
+	"chat": [
+		{"name": "Shandrïs", "text": "Bon avant que la bataille ne commence je vais profiter de la nuit pour voler 2/3 affaires aux orcs", "sprite":  "1"},
+		{"name": "Shandrïs", "text": "C'est pas le move le plus smart, mais je dois faire avancer le scénario", "sprite":  "1"},
+		{"name": "?", "text": "(Vous vous avancez discrétement vers le camp des orcs, la potion donné par Riton devrait rendre la tâche encore plus facile)", "sprite":  null},
+		{"name": "Orc", "text": "Zog zog", "sprite":  null},
+		{"name": "?", "text": "(Vous avez été repéré, la potion ne marche pas très bien ... Préparez vous au combat)", "sprite":  null},
+	]
+}

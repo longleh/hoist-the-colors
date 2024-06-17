@@ -48,7 +48,7 @@ func _on_dialog_start():
 func _on_dialog_end():
 	ship.resume_movement()
 	if current_island && !current_island["node"].get_visited():
-		current_island["node"].set_visited(true)
+		# current_island["node"].set_visited(true)
 		$Save.save()
 		current_island["node"].load_level()
 
