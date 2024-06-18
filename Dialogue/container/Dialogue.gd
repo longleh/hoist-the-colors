@@ -6,7 +6,8 @@ signal dialogue_start
 signal dialog_end
 
 @export_file("*.json") var dialog_file
-@export_range(0.0, 1.0) var DELTA_THRESHOLD = 0.03
+@export_range(0.0, 1.0) var DELTA_THRESHOLD = 0.01
+@export var INSTANT_DIALOG: bool = false
 
 @onready var base = $Base
 @onready var chat = $Base/Chat/Chat
@@ -40,9 +41,9 @@ var line_index = 0
 var text_to_display = null
 var text_index = 0
 var sum_of_deltas = 0
-var can_fast_diag: bool = true
 
 enum D_STATE {
+	HOLD,
 	STOPPED,
 	STARTED,
 	GET_NEXT_LINE,
@@ -50,10 +51,7 @@ enum D_STATE {
 	ENDED,
 }
 
-var CURRENT_STATE: D_STATE = D_STATE.STOPPED
-
-func _ready():
-	start_dialogue()
+var CURRENT_STATE: D_STATE = D_STATE.HOLD
 
 func load_dialogue():
 	if FileAccess.file_exists(dialog_file):
@@ -118,7 +116,6 @@ func _process(delta):
 			elif Input.is_action_just_pressed("diag_continue"):
 				end_dialog()
 		D_STATE.GET_NEXT_LINE:
-			can_fast_diag = false
 			if !continue_dialogue.visible:
 				start_more_animation()
 			elif Input.is_action_just_pressed("diag_continue"):
@@ -130,23 +127,26 @@ func _process(delta):
 				sum_of_deltas = 0
 
 func is_fasting_diag() -> bool:
-	if !can_fast_diag && Input.is_action_just_released("diag_continue"):
-		can_fast_diag = true
-		return false
-	if can_fast_diag && Input.is_action_pressed("diag_continue"):
+	if Input.is_action_pressed("diag_continue"):
 		return true
 	return false
 
 func display_chat():
-	if text_index >= text_to_display.length():
-		CURRENT_STATE = D_STATE.GET_NEXT_LINE
-		text_index = 0
-		text_to_display = null
-		increase_index_or_end_diag()
+	if INSTANT_DIALOG:
+		chat.add_text(text_to_display)
+		line_displayed()
+	elif text_index >= text_to_display.length():
+		line_displayed()
 	else:
 		chat.add_text(text_to_display[text_index])
 		text_index += 1
-		
+
+func line_displayed():
+	CURRENT_STATE = D_STATE.GET_NEXT_LINE
+	text_index = 0
+	text_to_display = null
+	increase_index_or_end_diag()
+
 func start_dialogue():
 	parsed_diag = load_dialogue()
 	if parsed_diag:
