@@ -18,6 +18,7 @@ func _ready():
 	shandr.stop_movement()
 	number_of_ennemies = MAXIMUM_ENNEMIES * 2
 	number_of_pickups = MAXIMUM_PICKUPS * 2
+	start()
 
 func _on_mob_timer_timeout():
 	if number_of_ennemies < MAXIMUM_ENNEMIES:
@@ -75,8 +76,8 @@ func restart():
 	$PickupSpawnTimer.start()
 	$UpdateTimer.start()
 	$LevelTimer.start()
-	$GameoverScreen.visible = false
 	$nw_background.playing = true
+	$GameoverScreen.visible = false
 	$deathscreen_bg.playing = false
 	$MobTimer.start()
 	wait_time = 255
@@ -155,12 +156,13 @@ func end_level():
 	level_ended.emit()
 
 func _on_skip_pressed():
-	end_level()
+	$GameoverScreen.visible = false
+	$deathscreen_bg.playing = false
+	_on_level_timer_timeout()
 
 func _on_victory_dialogue_dialog_end():
 	$AllianceBGSound.playing = false
 	end_level()
-
 
 func _on_intro_dialogue_dialog_end():
 	restart()

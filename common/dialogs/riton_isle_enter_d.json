@@ -1,9 +1,13 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"Capitaine Jenkins": "left",
 		"?": "left",
 		"Garde": "right"
+	},
+	"pitch": {
+		"?": 0.9,
+		"Garde": 4.5,
+		"Capitaine Jenkins": 1
 	},
 	"sprites": {},
 	"chat": [

@@ -1,8 +1,11 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"??": "left",
 		"(Voix lointaine)": "right"
+	},
+	"pitch": {
+		"??": 0.9,
+		"(Voix lointaine)": 5.0
 	},
 	"sprites": {},
 	"chat": [

@@ -1,8 +1,9 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"Shandrïs": "left",
-		"Riton": "right",
+	},
+	"pitch": {
+		"Shandrïs": 1,
 	},
 	"sprites": {
 		"1": "res://common/sprites/shandr_talk.png",

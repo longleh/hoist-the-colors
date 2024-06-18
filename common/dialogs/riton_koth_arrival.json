@@ -1,9 +1,13 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"Shandrïs": "left",
 		"?": "left",
 		"Orc": "right",
+	},
+	"pitch": {
+		"Shandrïs": 1,
+		"?": 0.9,
+		"Orc": 2.5,
 	},
 	"sprites": {
 		"1": "res://common/sprites/shandr_talk.png"

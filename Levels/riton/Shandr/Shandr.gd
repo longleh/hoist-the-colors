@@ -48,7 +48,6 @@ func die():
 	death.emit()
 
 func hit_state():
-	velocity = Vector2.ZERO
 	hitpoint -= 1
 	handle_hp_bar()
 	if hitpoint == 0:

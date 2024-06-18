@@ -1,9 +1,13 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"Shandrïs": "left",
 		"Riton": "right",
 		"Soldats": "right",
+	},
+	"pitch": {
+		"Shandrïs": 1,
+		"Riton": 3.0,
+		"Soldats": 4.5,
 	},
 	"sprites": {
 		"1": "res://common/sprites/drum_talk.png",

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dr0nlt7kehho7" path="res://Dialogue/container/DiagBox.png" id="2_1u4kq"]
 [ext_resource type="Texture2D" uid="uid://bsbqlywe2cmsm" path="res://Dialogue/container/more_diag.png" id="3_ndnlb"]
 [ext_resource type="FontFile" uid="uid://dykc5kb6oblig" path="res://common/fonts/LCDBlock.ttf" id="3_qcbm2"]
-[ext_resource type="AudioStream" uid="uid://drumi3nopeat1" path="res://Dialogue/container/Shantae_menu_text_types_out_02.mp3" id="5_yyhvy"]
+[ext_resource type="AudioStream" uid="uid://drumi3nopeat1" path="res://Dialogue/container/type_sound.mp3" id="5_ddlne"]
 
 [sub_resource type="Animation" id="Animation_xtw7p"]
 length = 0.001
@@ -177,5 +177,4 @@ visible = false
 position = Vector2(120, 180)
 
 [node name="DiagSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_yyhvy")
-pitch_scale = 0.48
+stream = ExtResource("5_ddlne")

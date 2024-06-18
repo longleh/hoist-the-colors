@@ -6,6 +6,12 @@
 		"?": "left",
 		"Riton": "right",
 	},
+	"pitch": {
+		"Capitaine Jenkins": 1,
+		"Shandrïs": 1,
+		"?": 0.9,
+		"Riton": 3.0,
+	},
 	"sprites": {
 		"1": "res://common/sprites/drum_talk.png",
 		"2": "res://common/sprites/shandr_talk.png",

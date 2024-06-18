@@ -1,8 +1,11 @@
 {
-	"id": "base_isle",
 	"layout": {
 		"Capitaine Jenkins": "left",
 		"Riton": "right",
+	},
+	"pitch": {
+		"Capitaine Jenkins": 1,
+		"Riton": 3.0,
 	},
 	"sprites": {
 		"1": "res://common/sprites/drum_talk.png",
