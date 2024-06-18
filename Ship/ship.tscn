@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=3 uid="uid://81olrcg2bk5t"]
 
 [ext_resource type="Script" path="res://Ship/ship.gd" id="1_3w1j3"]
-[ext_resource type="Texture2D" uid="uid://cxlloi0i71c3b" path="res://Ship/ship_spritesheet.png" id="2_qx2fn"]
+[ext_resource type="Texture2D" uid="uid://hap1abfohmyv" path="res://Ship/ship_start.png" id="2_jlcve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbe67"]
-size = Vector2(16, 16)
+size = Vector2(19, 37)
 
 [sub_resource type="Animation" id="Animation_cho3o"]
 length = 0.001
@@ -23,7 +23,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_fxh4r"]
 resource_name = "ship_down"
-length = 0.5
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,10 +32,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [10, 11, 12, 13, 14]
+"values": [4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_rk7vm"]
@@ -57,7 +57,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_fgnkt"]
 resource_name = "ship_left"
-length = 0.5
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,15 +66,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [5, 6, 7, 8, 9]
+"values": [2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_f3ey2"]
 resource_name = "ship_right"
-length = 0.5
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -83,15 +83,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [15, 16, 17, 18, 19]
+"values": [6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_8qa1a"]
 resource_name = "ship_up"
-length = 0.5
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -100,10 +100,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x8bku"]
@@ -117,16 +117,16 @@ _data = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yu8yy"]
-animation = &"ship_idle"
+animation = &"ship_down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_056h7"]
-animation = &"ship_idle"
+animation = &"ship_left"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ycb0"]
-animation = &"ship_idle"
+animation = &"ship_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5d0pd"]
-animation = &"ship_idle"
+animation = &"ship_right"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2fvir"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_yu8yy")
@@ -185,12 +185,13 @@ up_direction = Vector2(0, 1)
 script = ExtResource("1_3w1j3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qx2fn")
-hframes = 5
-vframes = 5
+texture = ExtResource("2_jlcve")
+hframes = 3
+vframes = 3
 frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -4.5)
 shape = SubResource("RectangleShape2D_sbe67")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -201,7 +202,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_eb0qb")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(-0.00101316, 0.968254)
 parameters/Move/blend_position = Vector2(-0.00504541, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]

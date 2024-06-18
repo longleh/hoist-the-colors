@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwjp6teudw3sr"]
+
+[ext_resource type="Shader" path="res://Water/water4/Water5.gdshader" id="1_1mjx3"]
+[ext_resource type="Texture2D" uid="uid://deenjwwsfo3mw" path="res://Water/water4/texture.png" id="2_mnriq"]
+[ext_resource type="Script" path="res://Water/water4/Water4.gd" id="3_nj3d4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ildf"]
+shader = ExtResource("1_1mjx3")
+shader_parameter/tile_factor = Vector2(5, 5)
+shader_parameter/aspect_ratio = 0.538131
+shader_parameter/time_factor = Vector2(0.5, 0.5)
+shader_parameter/offset_factor = Vector2(0.9, 0.7)
+shader_parameter/amplitude = Vector2(0.05, 0.02)
+
+[node name="Water4" type="Sprite2D"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_1ildf")
+position = Vector2(3700, -11.9999)
+scale = Vector2(11.6375, 6.2625)
+texture = ExtResource("2_mnriq")
+script = ExtResource("3_nj3d4")
+
+[connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]
