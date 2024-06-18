@@ -8,6 +8,11 @@
 	"sprites": {
 		"1": "res://common/sprites/innkeeper_sprite.png"
 	},
+	"pitch": {
+		"??": 0.9,
+		"Aubergiste": 5.0,
+		"Capitaine Jenkins": 1
+	},
 	"chat": [
 		{"name": "??", "text": "Vous vous reveillez au milieu d'une taverne et comprenez mieux pourquoi la Choppe Dorée est apparue dans vos rêves", "sprite": null},
 		{"name": "Aubergiste", "text": "Hé j'vous cause, vous avez bu toute ma bière ou presque et j'ai pas encore vu une seule piécette", "sprite": "1"},

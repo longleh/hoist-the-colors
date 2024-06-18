@@ -6,7 +6,8 @@ signal dialogue_start
 signal dialog_end
 
 @export_file("*.json") var dialog_file
-@export_range(0.0, 1.0) var DELTA_THRESHOLD = 0.01
+@export_range(0.0, 1.0) var DELTA_THRESHOLD = 0.05
+@export_range(0, 200) var CYCLES_BEFORE_FAST_CHAT = 50
 @export var INSTANT_DIALOG: bool = false
 
 @onready var base = $Base
@@ -41,6 +42,8 @@ var line_index = 0
 var text_to_display = null
 var text_index = 0
 var sum_of_deltas = 0
+var cycles_fast_chat = 0
+@onready var sound = $DiagSound
 
 enum D_STATE {
 	HOLD,
@@ -65,13 +68,17 @@ func load_dialogue():
 func next_content():
 	hide_name_box()
 	var speaker_name = parsed_diag['chat'][line_index]['name']
-	text_to_display = parsed_diag['chat'][line_index]['text']
+	text_to_display = parsed_diag['chat'][line_index]['text'].split(" ")
 	text_index = 0
 	chat.clear()
 	var sprite_id = parsed_diag['chat'][line_index]['sprite']
 	var sprite_path = parsed_diag['sprites'][sprite_id] if sprite_id else null
 	var position = parsed_diag['layout'][speaker_name]
 	var selected_name_box = name_box[position]
+	if parsed_diag.has('pitch'):
+		sound.pitch_scale = parsed_diag['pitch'][speaker_name]
+	else:
+		sound.pitch_scale = 1
 	display_name(selected_name_box, speaker_name)
 	handle_sprite(position, sprite_path)
 	CURRENT_STATE = D_STATE.DISPLAY_CHAT
@@ -120,26 +127,35 @@ func _process(delta):
 				start_more_animation()
 			elif Input.is_action_just_pressed("diag_continue"):
 				next_content()
+				cycles_fast_chat = 0
 		D_STATE.DISPLAY_CHAT:
 			sum_of_deltas += delta
+			if cycles_fast_chat < CYCLES_BEFORE_FAST_CHAT:
+				cycles_fast_chat += 1 # not a clean way but working :D
 			if sum_of_deltas >= DELTA_THRESHOLD || is_fasting_diag():
 				display_chat()
 				sum_of_deltas = 0
 
 func is_fasting_diag() -> bool:
+	if cycles_fast_chat < CYCLES_BEFORE_FAST_CHAT:
+		return false
 	if Input.is_action_pressed("diag_continue"):
 		return true
 	return false
 
 func display_chat():
 	if INSTANT_DIALOG:
+		sound.play()
 		chat.add_text(text_to_display)
 		line_displayed()
-	elif text_index >= text_to_display.length():
+	elif text_index >= text_to_display.size():
+		sound.stop()
 		line_displayed()
 	else:
 		chat.add_text(text_to_display[text_index])
+		chat.add_text(" ")
 		text_index += 1
+		sound.play()
 
 func line_displayed():
 	CURRENT_STATE = D_STATE.GET_NEXT_LINE
@@ -157,7 +173,6 @@ func start_dialogue():
 	else:
 		CURRENT_STATE = D_STATE.STOPPED
 		end_dialog()
-
 
 func end_dialog():
 	dialog_end.emit()
