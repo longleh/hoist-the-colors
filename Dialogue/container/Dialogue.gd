@@ -6,6 +6,8 @@ signal dialogue_start
 signal dialog_end
 
 @export_file("*.json") var dialog_file
+@export_range(0.0, 1.0) var DELTA_THRESHOLD = 0.03
+
 @onready var base = $Base
 @onready var chat = $Base/Chat/Chat
 @onready var continue_dialogue = $Base/ContinueDialog
@@ -34,9 +36,24 @@ signal dialog_end
 }
 
 var parsed_diag = null
-var chat_index = 0
-var text_displayed = false
-var dialog_started = false
+var line_index = 0
+var text_to_display = null
+var text_index = 0
+var sum_of_deltas = 0
+var can_fast_diag: bool = true
+
+enum D_STATE {
+	STOPPED,
+	STARTED,
+	GET_NEXT_LINE,
+	DISPLAY_CHAT,
+	ENDED,
+}
+
+var CURRENT_STATE: D_STATE = D_STATE.STOPPED
+
+func _ready():
+	start_dialogue()
 
 func load_dialogue():
 	if FileAccess.file_exists(dialog_file):
@@ -49,14 +66,17 @@ func load_dialogue():
 
 func next_content():
 	hide_name_box()
-	var speaker_name = parsed_diag['chat'][chat_index]['name']
-	var text = parsed_diag['chat'][chat_index]['text']
-	var sprite_id = parsed_diag['chat'][chat_index]['sprite']
+	var speaker_name = parsed_diag['chat'][line_index]['name']
+	text_to_display = parsed_diag['chat'][line_index]['text']
+	text_index = 0
+	chat.clear()
+	var sprite_id = parsed_diag['chat'][line_index]['sprite']
 	var sprite_path = parsed_diag['sprites'][sprite_id] if sprite_id else null
 	var position = parsed_diag['layout'][speaker_name]
 	var selected_name_box = name_box[position]
-	display_name_and_chat(selected_name_box, text, speaker_name)
+	display_name(selected_name_box, speaker_name)
 	handle_sprite(position, sprite_path)
+	CURRENT_STATE = D_STATE.DISPLAY_CHAT
 
 func handle_sprite(position, sprite_path):
 	sprites["left"]["container"].set("layer", 1)
@@ -73,52 +93,76 @@ func hide_name_box():
 	name_box["left"]["box"].visible = false
 	name_box["right"]["box"].visible = false
 
-func display_name_and_chat(selected_name_box, chat_text, speaker_name):
+func display_name(selected_name_box, speaker_name):
 	selected_name_box["text"].clear()
 	selected_name_box["text"].add_text(speaker_name)
-	chat.clear()
-	chat.add_text(chat_text)
 	selected_name_box["box"].visible = true
-	text_displayed = true
 
 func start_more_animation():
 	continue_dialogue.visible = true
 	continue_dialogue_animation.play("idle") 
 
 func increase_index_or_end_diag():
-	if chat_index + 1 < parsed_diag['chat'].size():
-		chat_index += 1
-		text_displayed = false
+	if line_index + 1 < parsed_diag['chat'].size():
+		line_index += 1
 	else:
-		end_dialog()
+		CURRENT_STATE = D_STATE.STOPPED
 
-func _process(_delta):
-	if !parsed_diag:
-		return
-	if !dialog_started:
-		return
-	if !text_displayed:
-		return next_content()
-	if text_displayed && !continue_dialogue.visible:
-		return start_more_animation()
-	if continue_dialogue.visible && Input.is_action_just_pressed("diag_continue"):
-		return increase_index_or_end_diag()
+func _process(delta):
+	match CURRENT_STATE:
+		D_STATE.STARTED:
+			next_content()
+		D_STATE.STOPPED:
+			if !continue_dialogue.visible:
+				start_more_animation()
+			elif Input.is_action_just_pressed("diag_continue"):
+				end_dialog()
+		D_STATE.GET_NEXT_LINE:
+			can_fast_diag = false
+			if !continue_dialogue.visible:
+				start_more_animation()
+			elif Input.is_action_just_pressed("diag_continue"):
+				next_content()
+		D_STATE.DISPLAY_CHAT:
+			sum_of_deltas += delta
+			if sum_of_deltas >= DELTA_THRESHOLD || is_fasting_diag():
+				display_chat()
+				sum_of_deltas = 0
+
+func is_fasting_diag() -> bool:
+	if !can_fast_diag && Input.is_action_just_released("diag_continue"):
+		can_fast_diag = true
+		return false
+	if can_fast_diag && Input.is_action_pressed("diag_continue"):
+		return true
+	return false
+
+func display_chat():
+	if text_index >= text_to_display.length():
+		CURRENT_STATE = D_STATE.GET_NEXT_LINE
+		text_index = 0
+		text_to_display = null
+		increase_index_or_end_diag()
+	else:
+		chat.add_text(text_to_display[text_index])
+		text_index += 1
 		
 func start_dialogue():
 	parsed_diag = load_dialogue()
 	if parsed_diag:
 		dialogue_start.emit()
-		dialog_started = true
 		focus_background.visible = true
 		base.visible = true
+		CURRENT_STATE = D_STATE.STARTED
 	else:
+		CURRENT_STATE = D_STATE.STOPPED
 		end_dialog()
 
 
 func end_dialog():
 	dialog_end.emit()
-	dialog_started = false
 	focus_background.visible = false
 	base.visible = false
 	$RightSpriteContainer.visible = false
 	$LeftSpriteContainer.visible = false
+	CURRENT_STATE = D_STATE.ENDED

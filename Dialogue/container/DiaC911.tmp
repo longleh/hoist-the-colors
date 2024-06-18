@@ -174,3 +174,5 @@ layer = 0
 [node name="LeftSprite" type="Sprite2D" parent="LeftSpriteContainer"]
 visible = false
 position = Vector2(120, 180)
+
+[connection signal="dialogue_start" from="." to="." method="_on_dialogue_start"]
