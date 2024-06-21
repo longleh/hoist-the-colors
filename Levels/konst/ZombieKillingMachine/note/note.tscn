@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn4up26o6iiqg"]
 
-[ext_resource type="Script" path="res://Levels/konst/GH/note/note.gd" id="1_nghbc"]
+[ext_resource type="Script" path="res://Levels/konst/ZombieKillingMachine/note/note.gd" id="1_130ru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dp2be"]
 size = Vector2(6, 4)
 
 [node name="Note" type="Node2D"]
-script = ExtResource("1_nghbc")
+script = ExtResource("1_130ru")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

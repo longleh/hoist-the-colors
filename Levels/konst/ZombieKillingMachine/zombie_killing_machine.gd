@@ -6,7 +6,7 @@ var delta_sum = 0
 var notes = null
 var current_note_index = null
 var current_bpm_index = null
-var song_resolution = 480.0
+var song_resolution = 192.0
 var bpm = 0
 var song_start_time = null
 var sum_of_deltas = 1
@@ -18,7 +18,7 @@ var song_playing = false
 
 @onready var sidescroll = $Sidescroll
 
-@onready var note_scene = preload("res://Levels/konst/GH/note/note.tscn")
+@onready var note_scene = preload("res://Levels/konst/ZombieKillingMachine/note/note.tscn")
 @onready var color_position = {
 	"0": {
 		"color": Color("#008000"),
@@ -45,17 +45,15 @@ var song_playing = false
 		"spawner": null
 	}
 }
+@onready var player_positions = [
+	$PlayerPosition/Greenspawn,
+	$PlayerPosition/Redspawn,
+	$PlayerPosition/Yellowspawn,
+	$PlayerPosition/Bluespawn,
+	$PlayerPosition/Orangespawn
+]
 
-enum {
-	PARSING,
-	DISPLAY_NOTE,
-	WAITING,
-	END
-}
-
-var note_batch = []
-
-var current_state = PARSING
+var current_player_position = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -73,17 +71,10 @@ func _process(delta):
 	if playing:
 		var bps = bpm / 60.0
 		var factor = delta / bps
-		$Sidescroll.position += Vector2(0, (240 * factor))
-
-
-func _current_node_index():
-	if current_note_index >= notes.size():
-		current_state = END
-		return -1
-	return current_note_index
-
+		$Sidescroll.position += Vector2(0, (360 * factor))
 
 func start():
+	$Player.position = player_positions[current_player_position].position
 	$SongParser.parse()
 
 
@@ -102,11 +93,12 @@ func handle_bpm():
 
 func _on_song_parser_parsing_end(_s: SongParser):
 	playing = true
-	notes = $SongParser.chart.difficulties["MediumSingle"]
+	notes = $SongParser.chart.difficulties["ExpertSingle"]
 	print("ça commence ?")
 	current_note_index = 0
 	current_bpm_index = 0
 	handle_bpm()
+	$AudioStreamPlayer2D.play()
 	handle_notes()
 	#	handle_next_note()
 	
@@ -120,11 +112,10 @@ func handle_notes():
 	var index = current_note_index
 	var max_size = notes.size()
 	if max_size <= index:
+		playing = false
 		return
 	var current_note = notes[index]
 	var wait_time = (int(current_note["frame"]) - last_tick) / song_resolution * 60.0 / bpm
-	if !song_playing:
-		handle_delay()
 	if wait_time > 0:
 		await get_tree().create_timer(wait_time).timeout
 	current_note_index += 1
@@ -133,8 +124,6 @@ func handle_notes():
 	handle_notes()
 
 func spawn_note(note):
-	var note_color_int = int(note["color"])
-	var note_frame = int(note["frame"])
 	var note_node = note_scene.instantiate()
 	note_node.color(color_position[note["color"]]["color"])
 	var base_position = color_position[note["color"]]["spawner"].position
@@ -142,5 +131,8 @@ func spawn_note(note):
 	$Sidescroll.add_child(note_node)
 	note_node.sync()
 
-func _on_timer_timeout():
-	$Timer.stop()
+
+func _on_player_move(y):
+	current_player_position += y
+	current_player_position = current_player_position % player_positions.size()
+	$Player.position = player_positions[current_player_position].position

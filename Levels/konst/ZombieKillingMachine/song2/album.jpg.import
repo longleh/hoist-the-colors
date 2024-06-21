@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddisy8xmwsp5m"
-path="res://.godot/imported/album.jpg-4d3f2ba72270acdc5893c3002f96379e.ctex"
+path="res://.godot/imported/album.jpg-38102876b1127df7aa024223ecf58620.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/konst/GH/song2/album.jpg"
-dest_files=["res://.godot/imported/album.jpg-4d3f2ba72270acdc5893c3002f96379e.ctex"]
+source_file="res://Levels/konst/ZombieKillingMachine/song2/album.jpg"
+dest_files=["res://.godot/imported/album.jpg-38102876b1127df7aa024223ecf58620.ctex"]
 
 [params]
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbacmu4qc51ui"]
+
+[ext_resource type="Script" path="res://Levels/konst/ZombieKillingMachine/Player/projectile.gd" id="1_flup7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi0ht"]
+size = Vector2(6, 14)
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_flup7")
+
+[node name="ProjectileBody" type="CharacterBody2D" parent="."]
+collision_layer = 16
+collision_mask = 8
+
+[node name="ColorRect2" type="ColorRect" parent="ProjectileBody"]
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+color = Color(1, 1, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ProjectileBody"]
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 2.0
+offset_bottom = 6.0
+color = Color(0.929412, 0.498039, 0.0627451, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileBody"]
+shape = SubResource("RectangleShape2D_gi0ht")

@@ -4,9 +4,6 @@ extends Node2D
 func color(new_color):
 	$StaticBody2D/Color.color = new_color
 
-func _process(delta):
-	pass
-
 func sync():
 	$Timer.start()
 
