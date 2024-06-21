@@ -3,7 +3,6 @@ extends Node2D
 signal island_touched(isle_name)
 signal island_leaved(isle_name)
 
-@export var enter_dialog_path = "res://common/dialogs/riton_isle_enter_d.json"
 var visited = false
 
 func _on_area_2d_body_entered(_body):

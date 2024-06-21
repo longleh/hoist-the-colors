@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgy84qavx08ee"]
+
+[ext_resource type="Script" path="res://Isle/KonstIsle/konst_isle.gd" id="1_df8rx"]
+[ext_resource type="Texture2D" uid="uid://2vsmq3btlmmf" path="res://Isle/textures/PalmierTmp.png" id="1_j6jmg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wittn"]
+radius = 6.0
+height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5l7hs"]
+radius = 15.0
+height = 32.0
+
+[node name="KonstIsle" type="Node2D"]
+script = ExtResource("1_df8rx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_j6jmg")
+
+[node name="Wall" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wittn")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_5l7hs")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

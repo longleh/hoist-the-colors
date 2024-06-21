@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://osa5shfyfjib"]
+[gd_scene load_steps=13 format=3 uid="uid://osa5shfyfjib"]
 
 [ext_resource type="PackedScene" uid="uid://81olrcg2bk5t" path="res://Ship/ship.tscn" id="1_vd3lj"]
 [ext_resource type="Script" path="res://World/world.gd" id="1_yurwn"]
 [ext_resource type="PackedScene" uid="uid://bj3uqo1ldu4xg" path="res://Menu/pause_menu_orchestrator.tscn" id="2_512ju"]
 [ext_resource type="PackedScene" uid="uid://deuo4tdbbsxa8" path="res://Menu/save.tscn" id="2_l4hcx"]
 [ext_resource type="PackedScene" uid="uid://52wnsrbrh2qt" path="res://Isle/RitonIsle/riton_isle.tscn" id="3_8myug"]
+[ext_resource type="PackedScene" uid="uid://cgy84qavx08ee" path="res://Isle/KonstIsle/konst_isle.tscn" id="7_jqhwl"]
 [ext_resource type="PackedScene" uid="uid://bwjp6teudw3sr" path="res://Water/water4/Water4.tscn" id="8_66r0s"]
 [ext_resource type="PackedScene" uid="uid://b7m3hapedvau4" path="res://Dialogue/container/Dialogue.tscn" id="8_y44ug"]
 
@@ -44,6 +45,9 @@ process_mode = 3
 [node name="RitonIsle" parent="." groups=["Persist"] instance=ExtResource("3_8myug")]
 z_index = 98
 position = Vector2(320, 88)
+
+[node name="KonstIsle" parent="." groups=["Persist"] instance=ExtResource("7_jqhwl")]
+position = Vector2(608, 88)
 
 [node name="MapBorder" type="StaticBody2D" parent="."]
 position = Vector2(-500, -500)
@@ -96,9 +100,14 @@ dialog_file = "res://common/dialogs/intro_overworld_d.json"
 [node name="LimitDialog" parent="." instance=ExtResource("8_y44ug")]
 dialog_file = "res://common/dialogs/limit_reached_d.json"
 
+[node name="KonstIsleStartingDiag" parent="." instance=ExtResource("8_y44ug")]
+dialog_file = "res://common/dialogs/konst_isle_enter.json"
+
 [connection signal="save_data" from="PauseMenuOrchestrator" to="Save" method="_on_save_from_pause"]
 [connection signal="island_leaved" from="RitonIsle" to="." method="_on_isle_leaved"]
 [connection signal="island_touched" from="RitonIsle" to="." method="_on_isle_touched"]
+[connection signal="island_leaved" from="KonstIsle" to="." method="_on_isle_leaved"]
+[connection signal="island_touched" from="KonstIsle" to="." method="_on_isle_touched"]
 [connection signal="body_entered" from="LimitReachedAreas/LeftLimit" to="." method="_on_left_limit_area_entered"]
 [connection signal="body_entered" from="LimitReachedAreas/UpLimit" to="." method="_on_up_limit_body_entered"]
 [connection signal="body_entered" from="LimitReachedAreas/BottomLimit" to="." method="_on_bottom_limit_body_entered"]
@@ -106,3 +115,5 @@ dialog_file = "res://common/dialogs/limit_reached_d.json"
 [connection signal="dialogue_start" from="RitonIsleStartingDiag" to="." method="_on_dialog_start"]
 [connection signal="dialog_end" from="IntroDialog" to="." method="_on_dialog_end"]
 [connection signal="dialogue_start" from="IntroDialog" to="." method="_on_dialog_start"]
+[connection signal="dialog_end" from="KonstIsleStartingDiag" to="." method="_on_dialog_end"]
+[connection signal="dialogue_start" from="KonstIsleStartingDiag" to="." method="_on_dialog_start"]

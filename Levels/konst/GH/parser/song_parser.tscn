@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://8uheip3j5n6u"]
+
+[ext_resource type="Script" path="res://Levels/konst/GH/parser/SongParser.gd" id="1_vlxlr"]
+[ext_resource type="Script" path="res://Levels/konst/GH/parser/IniFile.gd" id="2_7ssgw"]
+[ext_resource type="Script" path="res://Levels/konst/GH/parser/ChartFile.gd" id="3_ee1dc"]
+
+[node name="SongParser" type="Node"]
+script = ExtResource("1_vlxlr")
+song_directory = "res://Levels/konst/GH/song2"
+
+[node name="IniFile" type="Node" parent="."]
+script = ExtResource("2_7ssgw")
+
+[node name="ChartFile" type="Node" parent="."]
+script = ExtResource("3_ee1dc")

@@ -1,13 +1,18 @@
 extends Node2D
 
 enum ISLANDS {
-	RITON
+	RITON,
+	KONST
 }
 
 @onready var islands = {
 	ISLANDS.RITON: {
 		"node": $RitonIsle,
 		"entry_dialog": $RitonIsleStartingDiag,
+	},
+	ISLANDS.KONST: {
+		"node": $KonstIsle,
+		"entry_dialog": $KonstIsleStartingDiag,
 	}
 }
 @onready var intro_path = $IntroPath/IntroPathProgress

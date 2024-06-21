@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://1sh6t34b26ng"]
+
+[ext_resource type="Script" path="res://Levels/konst/GH/GH.gd" id="1_b58wg"]
+[ext_resource type="PackedScene" uid="uid://6xytonx1eklj" path="res://Levels/riton/Shandr/Shandr.tscn" id="1_fv75p"]
+[ext_resource type="Script" path="res://Levels/konst/GH/Sidescroll.gd" id="2_4wwa8"]
+[ext_resource type="PackedScene" uid="uid://crnhfx6itfvt6" path="res://Levels/riton/ennemies/orcs/orc.tscn" id="2_hqsr6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veo8b"]
+bg_color = Color(0, 0.541176, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v07n7"]
+bg_color = Color(0, 0.309804, 0, 1)
+
+[node name="Gh" type="Node2D"]
+script = ExtResource("1_b58wg")
+
+[node name="Shandr" parent="." instance=ExtResource("1_fv75p")]
+position = Vector2(328, 261)
+
+[node name="Sidescroll" type="Node2D" parent="."]
+script = ExtResource("2_4wwa8")
+
+[node name="Orc" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(398, -608)
+
+[node name="Orc2" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(200, -491)
+
+[node name="Orc3" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(407, -417)
+
+[node name="Orc4" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(117, -294)
+
+[node name="Orc5" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(402, -64)
+
+[node name="Orc6" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(196, -55)
+
+[node name="Orc7" parent="Sidescroll" instance=ExtResource("2_hqsr6")]
+position = Vector2(459, -237)
+
+[node name="SidescrollingTimer" type="Timer" parent="Sidescroll"]
+wait_time = 10.0
+
+[node name="ColorRect" type="ColorRect" parent="Sidescroll"]
+offset_top = 175.0
+offset_right = 629.0
+offset_bottom = 356.0
+color = Color(1, 0, 0.137255, 0.105882)
+
+[node name="ColorRect2" type="ColorRect" parent="Sidescroll"]
+offset_top = -39.0
+offset_right = 629.0
+offset_bottom = 142.0
+color = Color(1.82897e-06, 0.624509, 0.537832, 0.105882)
+
+[node name="ColorRect3" type="ColorRect" parent="Sidescroll"]
+offset_left = 3.0
+offset_top = -238.0
+offset_right = 632.0
+offset_bottom = -57.0
+color = Color(0.359993, 0.485843, 0.989976, 0.105882)
+
+[node name="ColorRect4" type="ColorRect" parent="Sidescroll"]
+offset_left = 1.0
+offset_top = -451.0
+offset_right = 630.0
+offset_bottom = -270.0
+color = Color(0.804561, 0.418578, 0.00491376, 0.105882)
+
+[node name="ColorRect5" type="ColorRect" parent="Sidescroll"]
+offset_left = -1.0
+offset_top = -670.0
+offset_right = 628.0
+offset_bottom = -489.0
+color = Color(0.930052, 0.175123, 0.509649, 0.105882)
+
+[node name="GHUi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Green" type="Button" parent="GHUi"]
+layout_mode = 2
+offset_left = 275.0
+offset_top = 309.0
+offset_right = 352.0
+offset_bottom = 340.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_veo8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v07n7")
+text = "Green
+"
+
+[node name="Red" type="Button" parent="GHUi"]
+layout_mode = 2
+offset_left = 361.0
+offset_top = 311.0
+offset_right = 442.0
+offset_bottom = 342.0
+text = "Red
+"
+
+[connection signal="timeout" from="Sidescroll/SidescrollingTimer" to="Sidescroll" method="_on_sidescrolling_timer_timeout"]

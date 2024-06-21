@@ -1,0 +1,15 @@
+{
+	"layout": {
+		"Capitaine Jenkins": "left",
+		"Konst": "right",
+	},
+	"pitch": {
+		"Capitaine Jenkins": 1,
+		"Konst": 2.0,
+	},
+	"sprites": {},
+	"chat": [
+		{"name": "Capitaine Jenkins", "text": "Salut !", "sprite":  null},
+		{"name": "Konst", "text": "Salut !", "sprite":  null},
+	]
+}
