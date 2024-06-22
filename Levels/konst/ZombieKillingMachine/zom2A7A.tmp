@@ -93,7 +93,7 @@ stream = ExtResource("3_rnfqp")
 [node name="Sidescroll" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("4_0rd87")]
-visible = false
+position = Vector2(232, 361)
 
 [connection signal="parsing_end" from="SongParser" to="." method="_on_song_parser_parsing_end"]
 [connection signal="move" from="Player" to="." method="_on_player_move"]

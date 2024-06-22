@@ -20,3 +20,6 @@ func _process(_delta):
 		move.emit(-1)
 	elif Input.is_action_just_pressed("ui_right"):
 		move.emit(1)
+
+func body() -> Node2D:
+	return $PlayerBody

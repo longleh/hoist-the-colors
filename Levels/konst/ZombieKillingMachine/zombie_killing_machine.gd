@@ -74,7 +74,8 @@ func _process(delta):
 		$Sidescroll.position += Vector2(0, (360 * factor))
 
 func start():
-	$Player.position = player_positions[current_player_position].position
+	$Player.body().position = player_positions[current_player_position].position
+	$Player.visible = true
 	$SongParser.parse()
 
 
@@ -135,4 +136,4 @@ func spawn_note(note):
 func _on_player_move(y):
 	current_player_position += y
 	current_player_position = current_player_position % player_positions.size()
-	$Player.position = player_positions[current_player_position].position
+	$Player.body().position = player_positions[current_player_position].position

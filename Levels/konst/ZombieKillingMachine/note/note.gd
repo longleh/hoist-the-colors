@@ -9,3 +9,9 @@ func sync():
 
 func _on_timer_timeout():
 	queue_free()
+
+func touched():
+	queue_free()
+
+func _on_touched(_area_rid, _area, _area_shape_index, _local_shape_index):
+	queue_free()
