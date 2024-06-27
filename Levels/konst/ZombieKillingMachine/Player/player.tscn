@@ -9,6 +9,7 @@ size = Vector2(42, 42)
 script = ExtResource("1_nt264")
 
 [node name="PlayerBody" type="Area2D" parent="."]
+collision_mask = 65
 metadata/_edit_group_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="PlayerBody"]
@@ -27,3 +28,8 @@ color = Color(0.109875, 0.280223, 0.718433, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody"]
 shape = SubResource("RectangleShape2D_6xgk2")
+
+[node name="FireCooldown" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="FireCooldown" to="." method="_on_fire_cooldown_timeout"]

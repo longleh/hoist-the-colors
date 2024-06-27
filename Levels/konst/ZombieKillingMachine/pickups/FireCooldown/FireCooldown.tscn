@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsmnbfqkhrkb3"]
+
+[ext_resource type="Theme" uid="uid://btabb6to3k26g" path="res://theme.tres" id="1_pc27p"]
+[ext_resource type="Script" path="res://Levels/konst/ZombieKillingMachine/pickups/FireCooldown/FireCooldown.gd" id="1_rfviw"]
+[ext_resource type="FontFile" uid="uid://dykc5kb6oblig" path="res://common/fonts/LCDBlock.ttf" id="2_0geox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj2tn"]
+size = Vector2(38, 14)
+
+[node name="FireCooldown" type="Node2D"]
+script = ExtResource("1_rfviw")
+
+[node name="StaticBody2D" type="Area2D" parent="."]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_bj2tn")
+
+[node name="Control" type="Control" parent="StaticBody2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -19.0
+offset_top = -7.0
+offset_right = 21.0
+offset_bottom = 7.0
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.621, 100, 0.206, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StaticBody2D/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pc27p")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_0geox")
+text = "   CD"
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_shape_entered" from="StaticBody2D" to="." method="_on_area_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
